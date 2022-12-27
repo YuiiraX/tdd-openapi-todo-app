@@ -4,23 +4,31 @@ A proof of concept for utilizing TDD on schema first project.
 
 ## Motivation
 
-I have always struggled to fully utilize TDD and schema first practice during development. This project is an exploration to help me better understand the workflow
+I have always struggled to fully utilize TDD and schema first practice during development. This project is a proof of
+concept in helping me understand both schema first development for OpenAPI and general practicing for TDD.
+For development that start from the frontend, this project is a proof of concept in introducing TDD and CDC when it
+comes to integrating with the backend.
 
-## Prerequisites
+## Technology
 
-### OpenAPI generator
+### Frontend
 
-https://openapi-generator.tech/
+- React JS
 
+### Backend
 
-## Roadmap
+- Kotlin Spring
 
-This is the planned roadmap for my exploration
+### Testing/Mocking Tools
 
-### 1. React JS Frontend Application
+- Spring Cloud Contract
+- Prism
+- Postman
 
-### 2. Kotlin Backend Web API
+## Development Plan
 
-### 3. Kotlin GraphQL gateway
-
-## Methodology
+1. Implement the frontend with TDD
+2. Create contract test and stub to continue frontend development
+3. Implement the API according to the contract test
+4. Rerun frontend tests with the now implemented API as the provider
+5. Refactor if needed
