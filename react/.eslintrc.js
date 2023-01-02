@@ -7,8 +7,7 @@ module.exports = {
     'plugin:react/recommended',
     'standard-with-typescript'
   ],
-  overrides: [
-  ],
+  overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -18,5 +17,8 @@ module.exports = {
     'react'
   ],
   rules: {
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/triple-slash-reference': 'off'
   }
 }
