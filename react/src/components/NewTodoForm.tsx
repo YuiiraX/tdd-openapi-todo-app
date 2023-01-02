@@ -1,29 +1,48 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 
-export default function NewTodoForm (
-  props: { onAddTodo: (todoText: string) => void }
-): JSX.Element {
-  const [todoText, setTodoText] = useState('')
+const NewTodoForm = (
+  props: {
+    showForm: boolean
+    onAddTodo: (todoText: string) => void
+  }
+): JSX.Element => {
+  const [todoTitle, setTodoTitle] = useState('')
+  const [todoDescription, setTodoDescription] = useState('')
 
-  const handleAddTodo = (): void => {
-    props.onAddTodo(todoText)
-    setTodoText('')
+  const handleAddTodo = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault()
+    props.onAddTodo(`${todoTitle} - ${todoDescription}`)
+    setTodoTitle('')
+    setTodoDescription('')
   }
 
-  return (
-    <div>
-      <input
-        data-testid="todoText"
-        type="text"
-        value={todoText}
-        onChange={e => setTodoText(e.target.value)}
-      />
-      <button
-        data-testid="addButton"
-        onClick={handleAddTodo}
-      >
-        Add
-      </button>
-    </div>
-  )
+  return <>
+    {props.showForm &&
+      <form data-testid="newTodoForm" onSubmit={handleAddTodo}>
+        <input
+          data-testid="newTodoTitle"
+          type="text"
+          value={todoTitle}
+          onChange={e => setTodoTitle(e.target.value)}
+        />
+        <input
+          data-testid="newTodoDescription"
+          type="text"
+          value={todoDescription}
+          onChange={e => setTodoDescription(e.target.value)}
+        />
+        <button
+          data-testid="newTodoSubmit"
+          type="submit"
+        >
+          Add
+        </button>
+      </form>
+    }
+  </>
 }
+
+NewTodoForm.defaultProps = {
+  showForm: true
+}
+export default NewTodoForm
