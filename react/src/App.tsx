@@ -1,21 +1,22 @@
 import { useState } from 'react'
 import NewTodoForm from './components/NewTodoForm'
 import TodoList from './components/TodoList'
-import { AddTodoButton } from './components/AddTodoButton'
+import { TodoContextProvider } from './contexts/todo.context'
 
 export default function App (): JSX.Element {
-  const [todos, setTodos] = useState<string[]>([])
-  const [showForm, setShowForm] = useState(false)
-  const handleAddTodo = (todoText: string): void => {
-    console.log(todoText)
-    setTodos([...todos, todoText])
-  }
+  const [isShowForm, setIsShowForm] = useState(false)
 
-  return (
-    <div>
-      <AddTodoButton onClick={() => setShowForm(!showForm)}/>
-      <NewTodoForm showForm={showForm} onAddTodo={handleAddTodo}/>
-      <TodoList todos={todos}/>
-    </div>
-  )
+  return <>
+    <TodoContextProvider>
+      <h1>Todo List</h1>
+      <button
+        data-testid="addButton"
+        onClick={() => setIsShowForm(!isShowForm)}
+      >
+        {isShowForm ? 'Hide' : 'Show'} Form
+      </button>
+      {isShowForm && <NewTodoForm />}
+      <TodoList />
+    </TodoContextProvider>
+  </>
 }
