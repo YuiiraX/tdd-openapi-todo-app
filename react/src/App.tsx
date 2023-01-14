@@ -1,7 +1,7 @@
 import { useState } from 'react'
+import { TodoContextProvider } from './contexts/todo.context'
 import NewTodoForm from './components/NewTodoForm'
 import TodoList from './components/TodoList'
-import { TodoContextProvider } from './contexts/todo.context'
 
 export default function App (): JSX.Element {
   const [isShowForm, setIsShowForm] = useState(false)
@@ -11,7 +11,9 @@ export default function App (): JSX.Element {
       <h1>Todo List</h1>
       <button
         data-testid="addButton"
-        onClick={() => setIsShowForm(!isShowForm)}
+        onClick={() => {
+          setIsShowForm(!isShowForm)
+        }}
       >
         {isShowForm ? 'Hide' : 'Show'} Form
       </button>

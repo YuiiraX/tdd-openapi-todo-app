@@ -15,8 +15,11 @@ describe('Creating a Todo', function () {
     cy.get('[data-testid="addButton"]')
       .click()
 
+    cy.get('[data-testid="newTodoForm"]')
+      .should('exist')
+
     cy.get('[data-testid="newTodoTitle"]')
-      .type('Get Milk')
+      .type('New Todo Title')
 
     cy.get('[data-testid="newTodoDescription"]')
       .type('Get Milk from the store')
