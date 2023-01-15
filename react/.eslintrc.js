@@ -4,8 +4,14 @@ module.exports = {
     es2021: true
   },
   extends: [
+    'eslint:recommended',
     'plugin:react/recommended',
-    'standard-with-typescript'
+    'plugin:react/jsx-runtime',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:react-hooks/recommended',
+    'standard-with-typescript',
+    'prettier'
   ],
   overrides: [],
   parserOptions: {

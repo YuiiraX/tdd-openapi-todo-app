@@ -5,7 +5,7 @@ A proof of concept for utilizing TDD on schema first project.
 ## Motivation
 
 I have always struggled to fully utilize TDD and schema first practice during development. This project is a proof of
-concept in helping me understand both schema first development for OpenAPI and general practicing for TDD.
+concept in helping me understand both schema first development for OpenAPI and general practice for TDD.
 
 For development that start from the frontend, this project is a proof of concept in introducing TDD and CDC when it
 comes to integrating with the backend.

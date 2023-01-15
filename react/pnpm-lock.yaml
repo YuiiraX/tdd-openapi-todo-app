@@ -14,12 +14,16 @@ specifiers:
   '@vitest/coverage-c8': ^0.27.0
   cypress: ^12.2.0
   eslint: ^8.30.0
+  eslint-config-prettier: ^8.6.0
   eslint-config-standard-with-typescript: ^26.0.0
   eslint-plugin-import: ^2.26.0
   eslint-plugin-n: ^15.6.0
   eslint-plugin-promise: ^6.1.1
   eslint-plugin-react: ^7.31.11
+  eslint-plugin-react-hooks: ^4.6.0
   jsdom: ^21.0.0
+  prettier: ^2.8.3
+  prettier-plugin-tailwindcss: ^0.2.1
   react: ^18.2.0
   react-dom: ^18.2.0
   styled-components: ^5.3.6
@@ -49,12 +53,16 @@ devDependencies:
   '@vitest/coverage-c8': 0.27.1_jsdom@21.0.0
   cypress: 12.2.0
   eslint: 8.30.0
+  eslint-config-prettier: 8.6.0_eslint@8.30.0
   eslint-config-standard-with-typescript: 26.0.0_r3et37n5jo7vy32jffmixody7a
   eslint-plugin-import: 2.26.0_smw3o7qjeokkcohbvp7rylsoqq
   eslint-plugin-n: 15.6.0_eslint@8.30.0
   eslint-plugin-promise: 6.1.1_eslint@8.30.0
   eslint-plugin-react: 7.31.11_eslint@8.30.0
+  eslint-plugin-react-hooks: 4.6.0_eslint@8.30.0
   jsdom: 21.0.0
+  prettier: 2.8.3
+  prettier-plugin-tailwindcss: 0.2.1_prettier@2.8.3
   tailwindcss: 3.2.4_postcss@8.4.20
   typescript: 4.9.4
   vite: 4.0.3_@types+node@18.11.18
@@ -2034,6 +2042,15 @@ packages:
       source-map: 0.6.1
     dev: true
 
+  /eslint-config-prettier/8.6.0_eslint@8.30.0:
+    resolution: {integrity: sha512-bAF0eLpLVqP5oEVUFKpMA+NnRFICwn9X8B5jrR9FcqnYBuPbqWEjTEspPWMj5ye6czoSLDweCzSo3Ko7gGrZaA==}
+    hasBin: true
+    peerDependencies:
+      eslint: '>=7.0.0'
+    dependencies:
+      eslint: 8.30.0
+    dev: true
+
   /eslint-config-standard-with-typescript/26.0.0_r3et37n5jo7vy32jffmixody7a:
     resolution: {integrity: sha512-TluIWunQo76qp4MHyYIaTT+sN2q2v/jTeE3Dj4rXsSbx27GOUEOujhJaAL3v9dHVQelAK13gZ5Jy9IWnWCyFrg==}
     peerDependencies:
@@ -2172,6 +2189,15 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0
+    dependencies:
+      eslint: 8.30.0
+    dev: true
+
+  /eslint-plugin-react-hooks/4.6.0_eslint@8.30.0:
+    resolution: {integrity: sha512-oFc7Itz9Qxh2x4gNHStv3BqJq54ExXmfC+a1NjAta66IAN87Wu0R/QArgIS9qKzX3dXKPI9H5crl9QchNMY9+g==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
     dependencies:
       eslint: 8.30.0
     dev: true
@@ -3732,6 +3758,21 @@ packages:
   /prelude-ls/1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
+    dev: true
+
+  /prettier-plugin-tailwindcss/0.2.1_prettier@2.8.3:
+    resolution: {integrity: sha512-aIO8IguumORyRsmT+E7JfJ3A9FEoyhqZR7Au7TBOege3VZkgMvHJMkufeYp4zjnDK2iq4ktkvGMNOQR9T8lisQ==}
+    engines: {node: '>=12.17.0'}
+    peerDependencies:
+      prettier: '>=2.2.0'
+    dependencies:
+      prettier: 2.8.3
+    dev: true
+
+  /prettier/2.8.3:
+    resolution: {integrity: sha512-tJ/oJ4amDihPoufT5sM0Z1SKEuKay8LfVAMlbbhnnkvt6BUserZylqo2PN+p9KeljLr0OHa2rXHU1T8reeoTrw==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
     dev: true
 
   /pretty-bytes/5.6.0:

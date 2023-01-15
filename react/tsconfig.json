@@ -22,7 +22,7 @@
   "include": [
     "src",
     "cypress",
-    "cypress.config.ts",
-    "vite.config.ts"
+    ".eslintrc.js",
+    ".prettierrc.js"
   ]
 }
