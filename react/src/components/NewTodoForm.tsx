@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react'
 import { TodoContext } from '../contexts/todo.context'
 
 const NewTodoForm = (): JSX.Element => {
-  const [todoTitle, setTodoTitle] = useState('')
   const [todoDescription, setTodoDescription] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -10,16 +9,11 @@ const NewTodoForm = (): JSX.Element => {
 
   const handleAddTodo = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
-    if (todoTitle === '') {
-      setErrorMessage('Title is required')
-      return
-    }
     if (todoDescription === '') {
       setErrorMessage('Description is required')
       return
     }
-    addTodo(todoTitle, todoDescription)
-    setTodoTitle('')
+    addTodo(todoDescription)
     setTodoDescription('')
   }
 
@@ -28,16 +22,6 @@ const NewTodoForm = (): JSX.Element => {
       data-testid="newTodoForm"
       onSubmit={handleAddTodo}
     >
-      <div>
-        <label htmlFor="todoTitle">Title</label>
-        <input
-          type="text"
-          id="todoTitle"
-          data-testid="newTodoTitle"
-          value={todoTitle}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTodoTitle(e.target.value)}
-        />
-      </div>
       <div>
         <label htmlFor="todoDescription">Description</label>
         <input

@@ -1,0 +1,19 @@
+{
+  "todos": [
+    {
+      "title": "Get Milk",
+      "description": "Get Milk from the store",
+      "completed": false
+    },
+    {
+      "title": "Get Bread",
+      "description": "Get Bread from the store",
+      "completed": false
+    },
+    {
+      "title": "Get Eggs",
+      "description": "Get Eggs from the store",
+      "completed": false
+    }
+  ]
+}

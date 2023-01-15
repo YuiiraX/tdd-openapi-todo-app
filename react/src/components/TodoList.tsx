@@ -5,11 +5,10 @@ export default function TodoList (): JSX.Element {
   const { todos } = useContext(TodoContext)
 
   return (
-    <ul>
+    <ul data-testid="todoList">
       {todos.map((todo, index) =>
         <li key={index}>
-          <h3>{todo.title}</h3>
-          <p>{todo.description}</p>
+          <span>{todo.description}</span>
         </li>
       )}
     </ul>

@@ -21,8 +21,6 @@
   },
   "include": [
     "src",
-    "cypress",
-    ".eslintrc.js",
-    ".prettierrc.js"
+    "cypress"
   ]
 }
