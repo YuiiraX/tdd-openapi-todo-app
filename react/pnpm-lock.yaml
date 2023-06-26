@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   axios:
     specifier: ^1.2.3
@@ -49,8 +53,8 @@ devDependencies:
     specifier: ^4.0.0
     version: 4.0.0(vite@4.0.3)
   '@vitest/coverage-c8':
-    specifier: ^0.31.0
-    version: 0.31.4(vitest@0.31.4)
+    specifier: ^0.32.2
+    version: 0.32.2(vitest@0.31.4)
   cypress:
     specifier: ^12.14.0
     version: 12.14.0
@@ -1132,8 +1136,8 @@ packages:
       - supports-color
     dev: true
 
-  /@vitest/coverage-c8@0.31.4(vitest@0.31.4):
-    resolution: {integrity: sha512-VPx368m4DTcpA/P0v3YdVxl4QOSh1DbUcXURLRvDShrIB5KxOgfzw4Bn2R8AhAe/GyiWW/FIsJ/OJdYXCCiC1w==}
+  /@vitest/coverage-c8@0.32.2(vitest@0.31.4):
+    resolution: {integrity: sha512-z07kMTN6e4t1jDY4XXU6W1LxCb3V5Rw7KAZId4VM6BCIGLGz1QqwH9UWYWv7LemqQVnARl5CwaDDwVrkcYgwPg==}
     peerDependencies:
       vitest: '>=0.30.0 <1'
     dependencies:
