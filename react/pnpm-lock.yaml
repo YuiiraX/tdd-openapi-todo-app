@@ -53,8 +53,8 @@ devDependencies:
     specifier: ^4.0.0
     version: 4.0.0(vite@4.3.9)
   '@vitest/coverage-c8':
-    specifier: ^0.32.2
-    version: 0.32.2(vitest@0.31.4)
+    specifier: ^0.32.4
+    version: 0.32.4(vitest@0.31.4)
   cypress:
     specifier: ^12.14.0
     version: 12.14.0
@@ -1156,8 +1156,8 @@ packages:
       - supports-color
     dev: true
 
-  /@vitest/coverage-c8@0.32.2(vitest@0.31.4):
-    resolution: {integrity: sha512-z07kMTN6e4t1jDY4XXU6W1LxCb3V5Rw7KAZId4VM6BCIGLGz1QqwH9UWYWv7LemqQVnARl5CwaDDwVrkcYgwPg==}
+  /@vitest/coverage-c8@0.32.4(vitest@0.31.4):
+    resolution: {integrity: sha512-ahJowPxgSBnaI2J+L/xmzM2oWFkk/+HtjnRfkQZrZd7H80JyG1/D6Xp6UPSZk8MXnoa90NThoyXRDBt12tNBRg==}
     peerDependencies:
       vitest: '>=0.30.0 <1'
     dependencies:
