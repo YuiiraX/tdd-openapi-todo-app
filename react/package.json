@@ -28,7 +28,7 @@
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
-    "@vitest/coverage-c8": "^0.32.4",
+    "@vitest/coverage-c8": "^0.33.0",
     "cypress": "^12.17.2",
     "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.8.0",
