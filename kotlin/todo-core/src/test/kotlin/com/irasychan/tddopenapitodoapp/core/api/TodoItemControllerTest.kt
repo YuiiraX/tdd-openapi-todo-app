@@ -311,4 +311,207 @@ class TodoItemControllerTest {
         )
             .andExpect(status().isNoContent)
     }
+
+    // Filtering test cases
+    @Test
+    @DisplayName("GET /todos should return 200 and a list of TodoItems with status filter")
+    fun `GET todos should return 200 and a list of TodoItems with status filter`() {
+        // given
+        // seed the database with some TodoItems
+        todoItemRepository.saveAll(
+            listOf(
+                TodoItem(
+                    id = UUID.fromString("00000000-0000-0000-0000-000000000001"),
+                    name = "Test Todo 1",
+                    description = "Test Description 1",
+                    status = TodoItemStatus.NOT_STARTED,
+                    dueDate = OffsetDateTime.parse("2022-12-31T23:59:59Z")
+                ),
+                TodoItem(
+                    id = UUID.fromString("00000000-0000-0000-0000-000000000002"),
+                    name = "Test Todo 2",
+                    description = "Test Description 2",
+                    status = TodoItemStatus.IN_PROGRESS,
+                    dueDate = OffsetDateTime.parse("2022-12-31T23:59:59Z")
+                ),
+                TodoItem(
+                    id = UUID.fromString("00000000-0000-0000-0000-000000000003"),
+                    name = "Test Todo 3",
+                    description = "Test Description 3",
+                    status = TodoItemStatus.COMPLETED,
+                    dueDate = OffsetDateTime.parse("2022-12-31T23:59:59Z")
+                )
+            )
+        )
+        mockMvc.perform(
+            get("/todos?statuses=NOT_STARTED")
+        )
+            .andExpect(status().isOk)
+            .andExpect(jsonPath("$").isArray)
+            .andExpect(jsonPath("$[0].id").value("00000000-0000-0000-0000-000000000001"))
+            .andExpect(jsonPath("$[0].name").value("Test Todo 1"))
+            .andExpect(jsonPath("$[0].description").value("Test Description 1"))
+            .andExpect(jsonPath("$[0].status").value("NOT_STARTED"))
+            .andExpect(jsonPath("$[0].dueDate").value("2022-12-31T23:59:59Z"))
+    }
+
+    @Test
+    @DisplayName("GET /todos should return 200 and a list of TodoItems with dueDateStart filter")
+    fun `GET todos should return 200 and a list of TodoItems with dueDateStart filter`() {
+        // given
+        // seed the database with some TodoItems
+        todoItemRepository.saveAll(
+            listOf(
+                TodoItem(
+                    id = UUID.fromString("00000000-0000-0000-0000-000000000001"),
+                    name = "Test Todo 1",
+                    description = "Test Description 1",
+                    status = TodoItemStatus.NOT_STARTED,
+                    dueDate = OffsetDateTime.parse("2022-12-30T23:59:59Z")
+                ),
+                TodoItem(
+                    id = UUID.fromString("00000000-0000-0000-0000-000000000002"),
+                    name = "Test Todo 2",
+                    description = "Test Description 2",
+                    status = TodoItemStatus.IN_PROGRESS,
+                    dueDate = OffsetDateTime.parse("2022-12-31T23:59:59Z")
+                ),
+                TodoItem(
+                    id = UUID.fromString("00000000-0000-0000-0000-000000000003"),
+                    name = "Test Todo 3",
+                    description = "Test Description 3",
+                    status = TodoItemStatus.COMPLETED,
+                    dueDate = OffsetDateTime.parse("2023-01-01T23:59:59Z")
+                )
+            )
+        )
+        mockMvc.perform(
+            get("/todos?dueDateStart=2022-12-31T22:59:59Z")
+        )
+            .andExpect(status().isOk)
+            .andExpect(jsonPath("$").isArray)
+            .andExpect(jsonPath("$[0].id").value("00000000-0000-0000-0000-000000000002"))
+            .andExpect(jsonPath("$[0].name").value("Test Todo 2"))
+            .andExpect(jsonPath("$[0].description").value("Test Description 2"))
+            .andExpect(jsonPath("$[0].status").value("IN_PROGRESS"))
+            .andExpect(jsonPath("$[0].dueDate").value("2022-12-31T23:59:59Z"))
+    }
+
+    @Test
+    @DisplayName("GET /todos should return 200 and a list of TodoItems with dueDateEnd filter")
+    fun `GET todos should return 200 and a list of TodoItems with dueDateEnd filter`() {
+        // given
+        // seed the database with some TodoItems
+        todoItemRepository.saveAll(
+            listOf(
+                TodoItem(
+                    id = UUID.fromString("00000000-0000-0000-0000-000000000001"),
+                    name = "Test Todo 1",
+                    description = "Test Description 1",
+                    status = TodoItemStatus.NOT_STARTED,
+                    dueDate = OffsetDateTime.parse("2022-12-31T23:59:59Z")
+                ),
+                TodoItem(
+                    id = UUID.fromString("00000000-0000-0000-0000-000000000002"),
+                    name = "Test Todo 2",
+                    description = "Test Description 2",
+                    status = TodoItemStatus.IN_PROGRESS,
+                    dueDate = OffsetDateTime.parse("2022-12-31T23:59:59Z")
+                ),
+                TodoItem(
+                    id = UUID.fromString("00000000-0000-0000-0000-000000000003"),
+                    name = "Test Todo 3",
+                    description = "Test Description 3",
+                    status = TodoItemStatus.COMPLETED,
+                    dueDate = OffsetDateTime.parse("2022-12-30T23:59:59Z")
+                )
+            )
+        )
+        mockMvc.perform(
+            get("/todos?dueDateEnd=2022-12-31T22:59:59Z")
+        )
+            .andExpect(status().isOk)
+            .andExpect(jsonPath("$").isArray)
+            .andExpect(jsonPath("$[0].id").value("00000000-0000-0000-0000-000000000003"))
+    }
+
+    @Test
+    @DisplayName("GET /todos should return 200 and a list of TodoItems with sort by dueDate")
+    fun `GET todos should return 200 and a list of TodoItems with sort by dueDate`() {
+        // given
+        // seed the database with some TodoItems
+        todoItemRepository.saveAll(
+            listOf(
+                TodoItem(
+                    id = UUID.fromString("00000000-0000-0000-0000-000000000001"),
+                    name = "Test Todo 1",
+                    description = "Test Description 1",
+                    status = TodoItemStatus.NOT_STARTED,
+                    dueDate = OffsetDateTime.parse("2022-12-29T23:59:59Z")
+                ),
+                TodoItem(
+                    id = UUID.fromString("00000000-0000-0000-0000-000000000002"),
+                    name = "Test Todo 2",
+                    description = "Test Description 2",
+                    status = TodoItemStatus.IN_PROGRESS,
+                    dueDate = OffsetDateTime.parse("2022-12-30T23:59:59Z")
+                ),
+                TodoItem(
+                    id = UUID.fromString("00000000-0000-0000-0000-000000000003"),
+                    name = "Test Todo 3",
+                    description = "Test Description 3",
+                    status = TodoItemStatus.COMPLETED,
+                    dueDate = OffsetDateTime.parse("2022-12-31T23:59:59Z")
+                )
+            )
+        )
+        mockMvc.perform(
+            get("/todos?sort=dueDate&order=desc")
+        )
+            .andExpect(status().isOk)
+            .andExpect(jsonPath("$").isArray)
+            .andExpect(jsonPath("$[0].id").value("00000000-0000-0000-0000-000000000003"))
+            .andExpect(jsonPath("$[1].id").value("00000000-0000-0000-0000-000000000002"))
+            .andExpect(jsonPath("$[2].id").value("00000000-0000-0000-0000-000000000001"))
+    }
+
+    @Test
+    @DisplayName("GET /todos should return 200 and a list of TodoItems with sort by name")
+    fun `GET todos should return 200 and a list of TodoItems with sort by name`() {
+        // given
+        // seed the database with some TodoItems
+        todoItemRepository.saveAll(
+            listOf(
+                TodoItem(
+                    id = UUID.fromString("00000000-0000-0000-0000-000000000001"),
+                    name = "Test Todo 1",
+                    description = "Test Description 1",
+                    status = TodoItemStatus.NOT_STARTED,
+                    dueDate = OffsetDateTime.parse("2022-12-29T23:59:59Z")
+                ),
+                TodoItem(
+                    id = UUID.fromString("00000000-0000-0000-0000-000000000002"),
+                    name = "Test Todo 2",
+                    description = "Test Description 2",
+                    status = TodoItemStatus.IN_PROGRESS,
+                    dueDate = OffsetDateTime.parse("2022-12-30T23:59:59Z")
+                ),
+                TodoItem(
+                    id = UUID.fromString("00000000-0000-0000-0000-000000000003"),
+                    name = "Test Todo 3",
+                    description = "Test Description 3",
+                    status = TodoItemStatus.COMPLETED,
+                    dueDate = OffsetDateTime.parse("2022-12-31T23:59:59Z")
+                )
+            )
+        )
+        mockMvc.perform(
+            get("/todos?sort=name&order=desc")
+        )
+            .andExpect(status().isOk)
+            .andExpect(jsonPath("$").isArray)
+            .andExpect(jsonPath("$[0].id").value("00000000-0000-0000-0000-000000000003"))
+            .andExpect(jsonPath("$[1].id").value("00000000-0000-0000-0000-000000000002"))
+            .andExpect(jsonPath("$[2].id").value("00000000-0000-0000-0000-000000000001"))
+    }
 }

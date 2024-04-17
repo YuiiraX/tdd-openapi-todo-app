@@ -4,9 +4,11 @@ import com.irasychan.tddopenapitodoapp.core.api.model.NewTodoItem
 import com.irasychan.tddopenapitodoapp.core.domain.TodoItem
 import com.irasychan.tddopenapitodoapp.core.domain.TodoItemRepository
 import com.irasychan.tddopenapitodoapp.core.domain.TodoItemStatus
+import org.springframework.data.domain.Sort
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
 import java.net.URI
+import java.time.OffsetDateTime
 import java.util.*
 import java.util.logging.Logger
 import com.irasychan.tddopenapitodoapp.core.api.model.TodoItemStatus as TodoItemStatusDTO
@@ -44,11 +46,35 @@ class TodoItemController(
         ).body(newTodo.toDto())
     }
 
-    override fun getAllTodos(): ResponseEntity<List<TodoItemDTO>> {
+    override fun getAllTodos(
+        statuses: List<TodoItemStatusDTO>?,
+        dueDateStart: OffsetDateTime?,
+        dueDateEnd: OffsetDateTime?,
+        sort: String?,
+        order: String?
+    ): ResponseEntity<List<com.irasychan.tddopenapitodoapp.core.api.model.TodoItem>> {
         logger.info("Getting all todo items")
-        return ResponseEntity.ok(
-            todoItemRepository.findAll().map { it.toDto() }
-        )
+
+        val sortDirection = Sort.Direction.fromString(order ?: "asc")
+        val sortField = sort ?: "uuid"
+
+        val result = todoItemRepository.findAll(
+        ).toList().filter {
+            statuses?.contains(TodoItemStatusDTO.valueOf(it.status.toString())) ?: true
+        }.filter {
+            dueDateStart?.let { start -> it.dueDate == null || it.dueDate!! >= start } ?: true
+        }.filter {
+            dueDateEnd?.let { end -> it.dueDate == null || it.dueDate!! <= end } ?: true
+        }.let { todoItems ->
+            when (sortField) {
+                "name" -> todoItems.sortedBy { it.name }
+                "status" -> todoItems.sortedBy { it.status }
+                "dueDate" -> todoItems.sortedBy { it.dueDate }
+            }
+            if (sortDirection == Sort.Direction.DESC) todoItems.reversed() else todoItems
+        }.map { it.toDto() }
+
+        return ResponseEntity.ok(result)
     }
 
     override fun getTodoById(id: UUID): ResponseEntity<TodoItemDTO> {
