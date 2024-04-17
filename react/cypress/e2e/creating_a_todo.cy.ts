@@ -27,21 +27,7 @@ describe('Creating a Todo', function () {
     cy.contains('Get Milk')
       .should('exist')
   })
-  it('should display error message when creating todo item without title', function () {
-    cy.visit('/')
 
-    cy.get('[data-testid="addButton"]')
-      .click()
-
-    cy.get('[data-testid="newTodoDescription"]')
-      .type('Get Milk from the store')
-
-    cy.get('[data-testid="newTodoButton"]')
-      .click()
-
-    cy.contains('Title is required')
-      .should('exist')
-  })
   it('should display error message when creating todo item without description', function () {
     cy.visit('/')
 

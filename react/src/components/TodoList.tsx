@@ -1,8 +1,7 @@
-import { TodoContext } from '../contexts/todo.context'
-import { useContext } from 'react'
+import { useTodoContext } from '../contexts/TodoContext'
 
 export default function TodoList (): JSX.Element {
-  const { todos } = useContext(TodoContext)
+  const { todos } = useTodoContext()
 
   return (
     <ul data-testid="todoList">

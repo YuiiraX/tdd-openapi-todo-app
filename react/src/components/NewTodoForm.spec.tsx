@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
 import NewTodoForm from './NewTodoForm'
-import { TodoContext } from '../contexts/todo.context'
+import { TodoContext } from '../contexts/TodoContext'
 
 describe('<NewTodoForm />', () => {
   it('should render a text input and a button', () => {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export interface TodoItem {
   description: string
@@ -9,7 +9,7 @@ export interface TodoContextType {
   addTodo: (description: string) => void
 }
 
-const TodoContext = React.createContext<TodoContextType>({
+export const TodoContext = React.createContext<TodoContextType>({
   todos: [],
   addTodo: () => {
   }
@@ -34,4 +34,6 @@ const TodoContextProvider = ({ children }: { children: React.ReactNode }): JSX.E
   )
 }
 
-export { TodoContext, TodoContextProvider }
+export const useTodoContext = (): TodoContextType => React.useContext(TodoContext)
+
+export default TodoContextProvider

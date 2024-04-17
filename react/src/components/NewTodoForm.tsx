@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react'
-import { TodoContext } from '../contexts/todo.context'
+import React, { useState } from 'react'
+import { useTodoContext } from '../contexts/TodoContext'
 
 const NewTodoForm = (): JSX.Element => {
   const [todoDescription, setTodoDescription] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
 
-  const { addTodo } = useContext(TodoContext)
+  const { addTodo } = useTodoContext()
 
   const handleAddTodo = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
