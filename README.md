@@ -26,7 +26,9 @@ We will start from a frontend first approach and then move to a backend first ap
 - JUnit 5 (Spring Boot Test)
 - MockK
 
-### TODO
+### Stages
+
+See [backend-design.md](./docs/backend-design.md) for the backend design.
 
 - [x] Create a basic OpenAPI schema
 - [x] Create a basic backend
