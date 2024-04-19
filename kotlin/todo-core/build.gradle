@@ -32,6 +32,7 @@ version = '0.0.1-SNAPSHOT'
 
 java {
     sourceCompatibility = '17'
+    targetCompatibility = '17'
 }
 
 kotlin {
@@ -58,21 +59,21 @@ repositories {
 
 dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
-    implementation 'org.springframework.boot:spring-boot-starter-integration'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 
     // OpenApi Kotlin Server
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("jakarta.validation:jakarta.validation-api")
-    implementation("jakarta.annotation:jakarta.annotation-api:2.1.0")
-    implementation("com.google.code.findbugs:jsr305:3.0.2")
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation('com.fasterxml.jackson.dataformat:jackson-dataformat-yaml')
+    implementation('com.fasterxml.jackson.dataformat:jackson-dataformat-xml')
+    implementation('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
+    implementation('com.fasterxml.jackson.module:jackson-module-kotlin')
+    implementation('jakarta.validation:jakarta.validation-api')
+    implementation('jakarta.annotation:jakarta.annotation-api:2.1.0')
+    implementation('com.google.code.findbugs:jsr305:3.0.2')
+    implementation('org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0')
 
     runtimeOnly 'org.postgresql:postgresql'
 
@@ -82,12 +83,15 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.integration:spring-integration-test'
+    testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+    testImplementation 'org.springframework.security:spring-security-test'
+
+    // JUnit Jupiter
+    testRuntimeOnly('org.junit.platform:junit-platform-launcher')
 
     // Testcontainers
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.testcontainers:postgresql'
-
 }
 
 tasks.withType(KotlinJvmCompile).configureEach {

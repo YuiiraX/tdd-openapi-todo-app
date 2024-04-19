@@ -1,41 +1,23 @@
-package com.irasychan.tddopenapitodoapp.core
+package com.irasychan.tddopenapitodoapp
 
 import com.irasychan.tddopenapitodoapp.core.api.TodoItemController
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.DynamicPropertyRegistry
-import org.springframework.test.context.DynamicPropertySource
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection
 import org.testcontainers.containers.PostgreSQLContainer
+import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Testcontainers
 class TodoCoreApplicationTests {
 	companion object {
 		@JvmStatic
+		@Container
+		@ServiceConnection
 		val postgresql: PostgreSQLContainer<Nothing> = PostgreSQLContainer("postgres:15.2")
-
-		@BeforeAll
-		@JvmStatic
-		fun beforeAll() {
-			postgresql.start()
-		}
-
-		@AfterAll
-		@JvmStatic
-		fun afterAll() {
-			postgresql.stop()
-		}
-
-		@JvmStatic
-		@DynamicPropertySource
-		fun configureProperties(registry: DynamicPropertyRegistry) {
-			registry.add("spring.datasource.url", postgresql::getJdbcUrl)
-			registry.add("spring.datasource.username", postgresql::getUsername)
-			registry.add("spring.datasource.password", postgresql::getPassword)
-		}
 	}
 
 	@Autowired

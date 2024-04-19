@@ -1,8 +1,23 @@
 # Backend Design
 
-![backend-design-step1.png](backend-design-step1.png)
+## 0. Introduction
 
-## API designs
+This document outlines the design of the backend services for the Todo application.
+The document is aim to provide a step-by-step journey showing the evolution of the backend services.
+
+## 1. Core Service
+
+### 1.1. Requirements
+
+- [x] Todo CRUD operations
+- [x] Filter todos (by status, due date, etc.)
+- [x] Sort todos (by name, status, due date, etc.)
+
+### 1.2. Model and System Design
+
+![backend-design-step1.png](./backend-design-step1.png)
+
+### 1.3. API
 
 ```yaml
 openapi: 3.0.3
@@ -209,7 +224,7 @@ components:
         - COMPLETED
 ```
 
-## Database design
+### 1.4. Database
 
 ```sql
 CREATE TABLE todo_items (
@@ -221,9 +236,26 @@ CREATE TABLE todo_items (
 );
 ```
 
+## 2. Basic Identity and Access Management
+
+### 2.1 Requirements
+
+- [x] Basic HTTP Authentication
+- [ ] User Model
+- [ ] User registration
+- [ ] User login
+- [ ] Role Model
+
+### 2.2. Model and System Design
+
+![backend-design-step2.png](backend-design-step2.png)
+
+### 2.3. API
+
+### 2.4. Database
+
 ## Next Step
 
 - [ ] Add Todo List Model
-- [ ] Implement Identity and Access Management (IAM)
 - [ ] Implement Faceted Search Service
 - [ ] Realtime Collaboration Service

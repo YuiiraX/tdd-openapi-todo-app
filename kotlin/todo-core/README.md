@@ -40,3 +40,4 @@ To run the tests, execute the following command:
 ## API Documentation
 
 The API follows the OpenAPI specification. The specification file is located at `specs/todo-core-v1.yaml`. You can view the API documentation by opening this file in an OpenAPI viewer.
+

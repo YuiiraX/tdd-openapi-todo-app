@@ -3,52 +3,35 @@ package com.irasychan.tddopenapitodoapp.core.api
 import com.irasychan.tddopenapitodoapp.core.domain.TodoItem
 import com.irasychan.tddopenapitodoapp.core.domain.TodoItemRepository
 import com.irasychan.tddopenapitodoapp.core.domain.TodoItemStatus
-import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection
 import org.springframework.http.MediaType
-import org.springframework.test.context.DynamicPropertyRegistry
-import org.springframework.test.context.DynamicPropertySource
+import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.testcontainers.containers.PostgreSQLContainer
+import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 import java.time.OffsetDateTime
 import java.util.*
 
+@Testcontainers
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@WithMockUser
 class TodoItemControllerTest {
 
     companion object {
-        @JvmStatic
+        @Container
+        @ServiceConnection
         val postgresql: PostgreSQLContainer<Nothing> = PostgreSQLContainer("postgres:15.2")
-
-        @BeforeAll
-        @JvmStatic
-        fun beforeAll() {
-            postgresql.start()
-        }
-
-        @AfterAll
-        @JvmStatic
-        fun afterAll() {
-            postgresql.stop()
-        }
-
-        @JvmStatic
-        @DynamicPropertySource
-        fun configureProperties(registry: DynamicPropertyRegistry) {
-            registry.add("spring.datasource.url", postgresql::getJdbcUrl)
-            registry.add("spring.datasource.username", postgresql::getUsername)
-            registry.add("spring.datasource.password", postgresql::getPassword)
-        }
     }
 
     @Autowired

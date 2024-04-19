@@ -1,4 +1,4 @@
-package com.irasychan.tddopenapitodoapp.core
+package com.irasychan.tddopenapitodoapp
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

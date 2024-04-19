@@ -33,6 +33,11 @@ See [backend-design.md](./docs/backend-design.md) for the backend design.
 - [x] Create a basic OpenAPI schema
 - [x] Create a basic backend
   - [x] Implement a basic CRUD functionality
+- [ ] Create authentication and authorization
+  - [ ] Add Identity component to the core application
+  - [ ] Implement a HTTP basic authentication for the API
+  - [ ] Implement RBAC for the todo items
+    - [ ] Implement a 
 - [ ] Create a basic frontend
   - [ ] Implement a basic UI
   - [ ] Implement a basic CRUD functionality
