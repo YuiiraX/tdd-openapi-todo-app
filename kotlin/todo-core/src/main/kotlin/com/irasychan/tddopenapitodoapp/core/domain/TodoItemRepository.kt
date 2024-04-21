@@ -1,10 +1,14 @@
 package com.irasychan.tddopenapitodoapp.core.domain
 
-import org.springframework.data.domain.Sort
 import org.springframework.data.repository.CrudRepository
-import java.time.OffsetDateTime
 import java.util.*
 
-// this is in domain layer only because we are using JPA to speed up the development a bit
-interface TodoItemRepository : CrudRepository<TodoItem, UUID>{
-}
+/**
+ * Repository for [TodoItem] entities.
+ * @see TodoItem
+ *
+ * I did not separate the domain repository interface from the Spring Data JPA repository interface
+ * because we are only providing a CRUD repository for the [TodoItem] entity.
+ * This is done to speed up the development process a bit.
+ */
+interface TodoItemRepository : CrudRepository<TodoItem, UUID>

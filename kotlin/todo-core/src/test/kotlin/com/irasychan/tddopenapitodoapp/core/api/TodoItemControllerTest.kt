@@ -32,6 +32,8 @@ class TodoItemControllerTest {
         @Container
         @ServiceConnection
         val postgresql: PostgreSQLContainer<Nothing> = PostgreSQLContainer("postgres:15.2")
+
+        const val API_BASE_PATH = "/v1"
     }
 
     @Autowired
@@ -49,7 +51,7 @@ class TodoItemControllerTest {
     @DisplayName("POST /todos should return 201 on success")
     fun `POST todos should create TodoItem`() {
         mockMvc.perform(
-            post("/todos")
+            post("${API_BASE_PATH}/todos")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""{"name": "Test Todo", "description": "Test Description", "status": "NOT_STARTED", "dueDate": "2022-12-31T23:59:59Z"}""")
         )
@@ -60,7 +62,7 @@ class TodoItemControllerTest {
     @DisplayName("POST /todos should return the created TodoItem")
     fun `POST todos should return the created TodoItem`() {
         mockMvc.perform(
-            post("/todos")
+            post("${API_BASE_PATH}/todos")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""{"name": "Test Todo", "description": "Test Description", "status": "NOT_STARTED", "dueDate": "2022-12-31T23:59:59Z"}""")
         )
@@ -76,7 +78,7 @@ class TodoItemControllerTest {
     @DisplayName("POST /todos should persist the TodoItem")
     fun `POST todos should create a TodoItem`() {
         mockMvc.perform(
-            post("/todos")
+            post("${API_BASE_PATH}/todos")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""{"name": "Test Todo", "description": "Test Description", "status": "NOT_STARTED", "dueDate": "2022-12-31T23:59:59Z"}""")
         )
@@ -93,7 +95,7 @@ class TodoItemControllerTest {
     @DisplayName("POST /todos should return 400 on invalid input")
     fun `POST todos should return 400 on invalid input`() {
         mockMvc.perform(
-            post("/todos")
+            post("${API_BASE_PATH}/todos")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""{"name": "", "description": "Test Description", "status": "NOT_STARTED", "dueDate": "2022-12-31T23:59:59Z"}""")
         )
@@ -131,7 +133,7 @@ class TodoItemControllerTest {
             )
         )
         mockMvc.perform(
-            get("/todos")
+            get("${API_BASE_PATH}/todos")
         )
             .andExpect(status().isOk)
             .andExpect(jsonPath("$").isArray)
@@ -168,7 +170,7 @@ class TodoItemControllerTest {
         )
 
         mockMvc.perform(
-            get("/todos/00000000-0000-0000-0000-000000000001")
+            get("${API_BASE_PATH}/todos/00000000-0000-0000-0000-000000000001")
         )
             .andExpect(status().isOk)
             .andExpect(jsonPath("$.id").value("00000000-0000-0000-0000-000000000001"))
@@ -182,7 +184,7 @@ class TodoItemControllerTest {
     @DisplayName("GET /todos/{id} should return 404 when the TodoItem is not found")
     fun `GET todos by id should return 404 when the TodoItem is not found`() {
         mockMvc.perform(
-            get("/todos/00000000-0000-0000-0000-000000000001")
+            get("${API_BASE_PATH}/todos/00000000-0000-0000-0000-000000000001")
         )
             .andExpect(status().isNotFound)
     }
@@ -191,7 +193,7 @@ class TodoItemControllerTest {
     @DisplayName("GET /todos/{id} should return 400 when the id is invalid")
     fun `GET todos by id should return 400 when the id is invalid`() {
         mockMvc.perform(
-            get("/todos/invalid-id")
+            get("${API_BASE_PATH}/todos/invalid-id")
         )
             .andExpect(status().isBadRequest)
     }
@@ -212,7 +214,7 @@ class TodoItemControllerTest {
         )
 
         mockMvc.perform(
-            put("/todos/00000000-0000-0000-0000-000000000001")
+            put("${API_BASE_PATH}/todos/00000000-0000-0000-0000-000000000001")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""{"name": "Updated Todo", "description": "Updated Description", "status": "IN_PROGRESS", "dueDate": "2022-12-31T23:59:59Z"}""")
         )
@@ -228,7 +230,7 @@ class TodoItemControllerTest {
     @DisplayName("PUT /todos/{id} should return 404 when the TodoItem is not found")
     fun `PUT todos by id should return 404 when the TodoItem is not found`() {
         mockMvc.perform(
-            put("/todos/00000000-0000-0000-0000-000000000001")
+            put("${API_BASE_PATH}/todos/00000000-0000-0000-0000-000000000001")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""{"name": "Updated Todo", "description": "Updated Description", "status": "IN_PROGRESS", "dueDate": "2022-12-31T23:59:59Z"}""")
         )
@@ -239,7 +241,7 @@ class TodoItemControllerTest {
     @DisplayName("PUT /todos/{id} should return 400 when the id is invalid")
     fun `PUT todos by id should return 400 when the id is invalid`() {
         mockMvc.perform(
-            put("/todos/invalid-id")
+            put("${API_BASE_PATH}/todos/invalid-id")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""{"name": "Updated Todo", "description": "Updated Description", "status": "IN_PROGRESS", "dueDate": "2022-12-31T23:59:59Z"}""")
         )
@@ -262,7 +264,7 @@ class TodoItemControllerTest {
         )
 
         mockMvc.perform(
-            put("/todos/00000000-0000-0000-0000-000000000001")
+            put("${API_BASE_PATH}/todos/00000000-0000-0000-0000-000000000001")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""{"description": "Updated Description", "status": "IN_PROGRESS", "dueDate": "2022-12-31T23:59:59Z"}""")
         )
@@ -290,7 +292,7 @@ class TodoItemControllerTest {
         )
 
         mockMvc.perform(
-            delete("/todos/00000000-0000-0000-0000-000000000001")
+            delete("${API_BASE_PATH}/todos/00000000-0000-0000-0000-000000000001")
         )
             .andExpect(status().isNoContent)
     }
@@ -327,7 +329,7 @@ class TodoItemControllerTest {
             )
         )
         mockMvc.perform(
-            get("/todos?statuses=NOT_STARTED")
+            get("${API_BASE_PATH}/todos?statuses=NOT_STARTED")
         )
             .andExpect(status().isOk)
             .andExpect(jsonPath("$").isArray)
@@ -369,7 +371,7 @@ class TodoItemControllerTest {
             )
         )
         mockMvc.perform(
-            get("/todos?dueDateStart=2022-12-31T22:59:59Z")
+            get("${API_BASE_PATH}/todos?dueDateStart=2022-12-31T22:59:59Z")
         )
             .andExpect(status().isOk)
             .andExpect(jsonPath("$").isArray)
@@ -411,7 +413,7 @@ class TodoItemControllerTest {
             )
         )
         mockMvc.perform(
-            get("/todos?dueDateEnd=2022-12-31T22:59:59Z")
+            get("${API_BASE_PATH}/todos?dueDateEnd=2022-12-31T22:59:59Z")
         )
             .andExpect(status().isOk)
             .andExpect(jsonPath("$").isArray)
@@ -449,7 +451,7 @@ class TodoItemControllerTest {
             )
         )
         mockMvc.perform(
-            get("/todos?sort=dueDate&order=desc")
+            get("${API_BASE_PATH}/todos?sort=dueDate&order=desc")
         )
             .andExpect(status().isOk)
             .andExpect(jsonPath("$").isArray)
@@ -489,7 +491,7 @@ class TodoItemControllerTest {
             )
         )
         mockMvc.perform(
-            get("/todos?sort=name&order=desc")
+            get("${API_BASE_PATH}/todos?sort=name&order=desc")
         )
             .andExpect(status().isOk)
             .andExpect(jsonPath("$").isArray)

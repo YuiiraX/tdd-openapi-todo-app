@@ -227,12 +227,13 @@ components:
 ### 1.4. Database
 
 ```sql
-CREATE TABLE todo_items (
-    id UUID PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+CREATE TABLE todo_items
+(
+    id          UUID PRIMARY KEY,
+    name        VARCHAR(255) NOT NULL,
     description TEXT,
-    due_date TIMESTAMP WITH TIME ZONE,
-    status VARCHAR(255) NOT NULL
+    due_date    TIMESTAMP WITH TIME ZONE,
+    status      VARCHAR(255) NOT NULL
 );
 ```
 
@@ -241,18 +242,44 @@ CREATE TABLE todo_items (
 ### 2.1 Requirements
 
 - [x] Basic HTTP Authentication
-- [ ] User Model
-- [ ] User registration
-- [ ] User login
-- [ ] Role Model
+- [x] User registration
+- [ ] Identity Models persistence
 
 ### 2.2. Model and System Design
 
-![backend-design-step2.png](backend-design-step2.png)
-
 ### 2.3. API
 
+- Use Basic HTTP Authentication for simplicity
+
+```yaml
+... # Attach after finishing this section
+```
+
 ### 2.4. Database
+
+I've tried to use the default JdbcUserDetailsManager, but the default scheme is not compatible with postgresql, as it
+uses `varchar_ignorecase` which is not supported by postgresql.
+
+I will build on top of the default DDL at classpath `org/springframework/security/core/userdetails/jdbc/users.ddl` to
+create our own User and Role models and implement the UserDetailsService interface.
+
+I think this will also make it a good time to introduce database migrations to our application.
+
+For database migration, we have two options: Flyway and Liquibase.
+
+#### 2.4.1. Liquibase
+
+Official documentation: https://www.liquibase.org/documentation/index.html
+
+1. We will add the changelog for the existing todo_items table.
+2. We will add a new changelog for the users and roles tables.
+
+- Users and Roles tables
+
+
+### 2.5. Design Choices
+
+
 
 ## Next Step
 

@@ -1,7 +1,6 @@
 package com.irasychan.tddopenapitodoapp.core.domain
 
 import jakarta.persistence.*
-import jakarta.validation.constraints.NotBlank
 import org.hibernate.proxy.HibernateProxy
 import java.time.OffsetDateTime
 import java.util.*
@@ -10,6 +9,7 @@ import java.util.*
 @Table(
     name = "todo_items",
     indexes = [
+        Index(name = "idx_todo_items_name", columnList = "name"),
         Index(name = "idx_todo_items_status", columnList = "status"),
         Index(name = "idx_todo_items_due_date", columnList = "due_date DESC")
     ],

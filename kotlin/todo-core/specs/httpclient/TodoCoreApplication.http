@@ -1,0 +1,60 @@
+###
+# @name Create Todo API
+POST http://localhost:{{port}}/v1/todos
+Authorization: Basic {{username}} {{password}}
+Content-Type: application/json
+
+{
+  "name": "Buy groceries",
+  "description": "Buy milk, eggs, and bread",
+  "dueDate": "2021-12-31T23:59:59Z",
+  "status": "NOT_STARTED"
+}
+
+> {%
+  client.global.set("id", response.body['id'])
+%}
+
+###
+# @name Get All Todo Items
+GET http://localhost:{{port}}/v1/todos
+Authorization: Basic {{username}} {{password}}
+
+###
+# @name Get Todo Items with Filters
+GET http://localhost:{{port}}/v1/todos
+    ?statuses=NOT_STARTED,IN_PROGRESS
+Authorization: Basic {{username}} {{password}}
+
+###
+# @name Get Todo Item
+GET http://localhost:{{port}}/v1/todos/{{id}}
+Authorization: Basic {{username}} {{password}}
+
+###
+# @name Update Todo Item
+PUT http://localhost:{{port}}/v1/todos/{{id}}
+Authorization: Basic {{username}} {{password}}
+Content-Type: application/json
+
+{
+  "name": "Buy groceries",
+  "description": "Buy milk, eggs, and bread",
+  "dueDate": "2021-12-31T23:59:59Z",
+  "status": "IN_PROGRESS"
+}
+
+###
+# @name Delete Todo Item
+DELETE http://localhost:{{port}}/v1/todos/{{id}}
+Authorization: Basic {{username}} {{password}}
+
+###
+# @name Register User
+POST http://localhost:{{port}}/v1/identity/register
+Content-Type: application/json
+
+{
+  "username": "test_user2",
+  "password": "password"
+}

@@ -1,0 +1,13 @@
+spring:
+  main:
+    banner-mode: off
+
+logging:
+ level:
+   web: debug
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
