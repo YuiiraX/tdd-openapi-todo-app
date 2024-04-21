@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1713716437047-2
+      author: irasychan
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: username
+                  value: user
+              - column:
+                  name: password
+                  value: $2a$10$97xIVJjgTAl36Fiyj6/f5.96OjRMgFfGJTOoMb4LA8ktqrXNBpExW
+              - column:
+                  name: enabled
+                  value: "true"
+            tableName: users
+        - insert:
+            columns:
+              - column:
+                  name: username
+                  value: user
+              - column:
+                  name: authority
+                  value: ROLE_USER
+            tableName: authorities

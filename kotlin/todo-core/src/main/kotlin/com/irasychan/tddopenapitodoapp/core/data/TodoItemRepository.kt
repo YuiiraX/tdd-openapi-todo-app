@@ -1,5 +1,6 @@
-package com.irasychan.tddopenapitodoapp.core.domain
+package com.irasychan.tddopenapitodoapp.core.data
 
+import com.irasychan.tddopenapitodoapp.core.model.TodoItem
 import org.springframework.data.repository.CrudRepository
 import java.util.*
 

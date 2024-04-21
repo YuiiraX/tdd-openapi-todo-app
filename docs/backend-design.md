@@ -265,21 +265,25 @@ create our own User and Role models and implement the UserDetailsService interfa
 
 I think this will also make it a good time to introduce database migrations to our application.
 
-For database migration, we have two options: Flyway and Liquibase.
+For database migration, we have two options: Flyway and Liquibase, 
+and we will be using Liquibase for now in this project. 
+
+Flyway version will be added in the future.
 
 #### 2.4.1. Liquibase
 
 Official documentation: https://www.liquibase.org/documentation/index.html
 
-1. We will add the changelog for the existing todo_items table.
-2. We will add a new changelog for the users and roles tables.
+1. We will add the changelog for the existing todo_items table.  
+    see: `src/main/resources/db/changelog/changes/db.changelog-v2024042101-create-core-tables.yaml`
+2. We will add a new changelog for the users and authorities tables.
+    see: `src/main/resources/db/changelog/changes/db.changelog-v2024042201-create-user-role-tables.yaml`
+3. We will add a new changelog for the initial data.
+    see: `src/main/resources/db/changelog/changes/db.changelog-v2024042302-insert-default-user.yaml`
 
-- Users and Roles tables
+#### 2.4.2. Flyway
 
-
-### 2.5. Design Choices
-
-
+Official documentation: https://flywaydb.org/documentation/
 
 ## Next Step
 

@@ -1,8 +1,8 @@
 package com.irasychan.tddopenapitodoapp.core.api
 
-import com.irasychan.tddopenapitodoapp.core.domain.TodoItem
-import com.irasychan.tddopenapitodoapp.core.domain.TodoItemRepository
-import com.irasychan.tddopenapitodoapp.core.domain.TodoItemStatus
+import com.irasychan.tddopenapitodoapp.core.model.TodoItem
+import com.irasychan.tddopenapitodoapp.core.data.TodoItemRepository
+import com.irasychan.tddopenapitodoapp.core.model.TodoItemStatus
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test

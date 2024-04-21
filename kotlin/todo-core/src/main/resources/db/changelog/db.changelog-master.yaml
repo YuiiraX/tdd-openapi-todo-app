@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/db.changelog-v2024042101-create-core-tables.yaml
+  - include:
+      file: db/changelog/db.changelog-v2024042201-create-user-role-tables.yaml
+  - include:
+      file: db/changelog/db.changelog-v2024042202-insert-default-user.yaml

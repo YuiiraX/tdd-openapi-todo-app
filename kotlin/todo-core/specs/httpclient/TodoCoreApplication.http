@@ -1,3 +1,6 @@
+# TIL, Apparently IntelliJ will do the base64 encoding for you in the Authorization header when you use the Basic auth type.
+# so you can just use the username and password as is.
+
 ###
 # @name Create Todo API
 POST http://localhost:{{port}}/v1/todos

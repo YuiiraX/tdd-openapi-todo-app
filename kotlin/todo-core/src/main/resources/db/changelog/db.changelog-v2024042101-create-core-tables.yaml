@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1713700169876-1
+      author: irasychan
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_todo_items
+                  name: id
+                  type: UUID
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: status
+                  type: VARCHAR(255)
+              - column:
+                  name: due_date
+                  type: timestamp
+            tableName: todo_items
+        - createIndex:
+            columns:
+              - column:
+                  descending: true
+                  name: due_date
+            indexName: idx_todo_items_due_date
+            tableName: todo_items
+        - createIndex:
+            columns:
+              - column:
+                  name: name
+            indexName: idx_todo_items_name
+            tableName: todo_items
+        - createIndex:
+            columns:
+              - column:
+                  name: status
+            indexName: idx_todo_items_status
+            tableName: todo_items
+

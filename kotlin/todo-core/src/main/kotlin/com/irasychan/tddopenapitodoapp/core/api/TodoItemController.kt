@@ -1,9 +1,9 @@
 package com.irasychan.tddopenapitodoapp.core.api
 
 import com.irasychan.tddopenapitodoapp.core.api.model.NewTodoItem
-import com.irasychan.tddopenapitodoapp.core.domain.TodoItem
-import com.irasychan.tddopenapitodoapp.core.domain.TodoItemRepository
-import com.irasychan.tddopenapitodoapp.core.domain.TodoItemStatus
+import com.irasychan.tddopenapitodoapp.core.model.TodoItem
+import com.irasychan.tddopenapitodoapp.core.data.TodoItemRepository
+import com.irasychan.tddopenapitodoapp.core.model.TodoItemStatus
 import org.springframework.data.domain.Sort
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController

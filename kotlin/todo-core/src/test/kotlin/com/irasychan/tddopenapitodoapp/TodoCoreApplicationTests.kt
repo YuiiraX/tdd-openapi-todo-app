@@ -23,7 +23,6 @@ class TodoCoreApplicationTests {
 	@Autowired
 	private lateinit var todoItemController: TodoItemController
 
-
 	/**
 	 * This function tests whether the application context loads correctly.
 	 * This is a basic sanity check to ensure that the Spring Boot application is configured correctly.

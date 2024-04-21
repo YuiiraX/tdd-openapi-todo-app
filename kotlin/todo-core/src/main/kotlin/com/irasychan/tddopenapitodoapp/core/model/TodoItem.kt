@@ -1,4 +1,4 @@
-package com.irasychan.tddopenapitodoapp.core.domain
+package com.irasychan.tddopenapitodoapp.core.model
 
 import jakarta.persistence.*
 import org.hibernate.proxy.HibernateProxy

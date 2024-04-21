@@ -1,4 +1,4 @@
-package com.irasychan.tddopenapitodoapp.core.domain
+package com.irasychan.tddopenapitodoapp.core.model
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
