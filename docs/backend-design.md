@@ -252,7 +252,246 @@ CREATE TABLE todo_items
 - Use Basic HTTP Authentication for simplicity
 
 ```yaml
-... # Attach after finishing this section
+openapi: 3.0.3
+info:
+  title: Todo Core API
+  description: Core API for the Todo application
+  version: 1.2.0
+servers:
+  - url: '{protocol}://localhost:{port}/v1'
+    description: Local server
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: 'http'
+      port:
+        default: '8080'
+tags:
+  - name: todos
+    description: Operations related to todos
+  - name: identity
+    description: Operations related to Identity
+security:
+  - BasicAuth: []
+paths:
+  /todos:
+    get:
+      summary: Get all todos
+      operationId: getAllTodos
+      tags:
+        - todos
+      parameters:
+        - name: statuses
+          in: query
+          description: The statuses of the todos to filter by
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TodoItemStatus'
+        - name: dueDateStart
+          in: query
+          description: The start of the due date range to filter by
+          schema:
+            type: string
+            format: date-time
+        - name: dueDateEnd
+          in: query
+          description: The end of the due date range to filter by
+          schema:
+            type: string
+            format: date-time
+        - name: sort
+          in: query
+          description: The field to sort by
+          schema:
+            type: string
+            enum:
+              - name
+              - status
+              - dueDate
+        - name: order
+          in: query
+          description: The order to sort by
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+      responses:
+        '200':
+          description: A list of todos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TodoItem'
+    post:
+      summary: Create a todo
+      operationId: createTodo
+      tags:
+        - todos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTodoItem'
+      responses:
+        '201':
+          description: The created todo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TodoItem'
+  /todos/{id}:
+    get:
+      summary: Get a todo by ID
+      operationId: getTodoById
+      tags:
+        - todos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the todo
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: The todo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TodoItem'
+    put:
+      summary: Update a todo
+      operationId: updateTodo
+      tags:
+        - todos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the todo
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TodoItem'
+      responses:
+        '200':
+          description: The updated todo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TodoItem'
+    delete:
+      summary: Delete a todo
+      operationId: deleteTodo
+      tags:
+        - todos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the todo
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: The todo was deleted
+  /identity/register:
+    post:
+      summary: Register a new user
+      operationId: registerUser
+      tags:
+        - identity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUserRequest'
+      responses:
+        '201':
+          description: Created
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+  schemas:
+    TodoItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        dueDate:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/TodoItemStatus'
+      example:
+        id: 'aa8970d2-8564-4f5a-8f4a-9e95a9b92298'
+        name: 'Buy groceries'
+        description: 'Buy milk, eggs, and bread'
+        dueDate: '2021-12-31T23:59:59Z'
+        status: 'NOT_STARTED'
+    NewTodoItem:
+      type: object
+      properties:
+        name:
+          type: string
+          x-field-extra-annotation: "@jakarta.validation.constraints.NotBlank"
+        description:
+          type: string
+        dueDate:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/TodoItemStatus'
+      required:
+        - name
+        - status
+      example:
+        name: 'Buy groceries'
+        description: 'Buy milk, eggs, and bread'
+        dueDate: '2021-12-31T23:59:59Z'
+        status: 'NOT_STARTED'
+    TodoItemStatus:
+      type: string
+      enum:
+        - NOT_STARTED
+        - IN_PROGRESS
+        - COMPLETED
+    RegisterUserRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    RegisterUserResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        username:
+          type: string
 ```
 
 ### 2.4. Database
