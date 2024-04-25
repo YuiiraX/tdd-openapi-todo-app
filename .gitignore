@@ -5,3 +5,6 @@
 *.iml
 out
 gen
+
+# Http client files
+http-client.private.env.json

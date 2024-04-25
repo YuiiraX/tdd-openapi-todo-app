@@ -7,6 +7,8 @@ The document is aim to provide a step-by-step journey showing the evolution of t
 
 ## 1. Core Service
 
+The core service will provide the basic CRUD operations for the Todo application.
+
 ### 1.1. Requirements
 
 - [x] Todo CRUD operations
@@ -239,6 +241,9 @@ CREATE TABLE todo_items
 
 ## 2. Basic Identity and Access Management
 
+In this update, we will create a basic user registration process and use Basic HTTP Authentication for simplicity.
+Only registered users can access the Todo API, but we will not implement any roles and authorities for now.
+
 ### 2.1 Requirements
 
 - [x] Basic HTTP Authentication
@@ -246,6 +251,8 @@ CREATE TABLE todo_items
 - [ ] Identity Models persistence
 
 ### 2.2. Model and System Design
+
+![backend-design-step2](backend-design-step2.png)
 
 ### 2.3. API
 
@@ -523,6 +530,19 @@ Official documentation: https://www.liquibase.org/documentation/index.html
 #### 2.4.2. Flyway
 
 Official documentation: https://flywaydb.org/documentation/
+
+## 3. Advanced Identity and Access Management
+
+### 3.1. Requirements
+
+- [ ] Customize User and Role models
+- [ ] User roles and authorities
+- [ ] Admin functionality to manage users and roles
+
+## 4. Todo List and Ownership
+
+We will keep this application as single tenant, which each user have ownership to their todo lists and items.
+Admin can view all todo lists and items, along with information about the owner and permission for the todo list and items.
 
 ## Next Step
 
