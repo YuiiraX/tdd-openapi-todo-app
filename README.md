@@ -42,6 +42,19 @@ See [backend-design.md](./docs/backend-design.md) for the backend design.
   - [ ] Implement a basic UI
   - [ ] Implement a basic CRUD functionality
 
+## Getting Started
+
+### Prerequisites
+
+- JDK 17 or later
+- Gradle
+
+### Building the Project
+
+#### Backend (Kotlin Spring)
+
+See [kotlin/todo-core/README.md](./kotlin/todo-core/README.md) for more information.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
