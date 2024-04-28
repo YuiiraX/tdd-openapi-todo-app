@@ -11,6 +11,19 @@ We will simulate getting requirements from a set of user stories and then use TD
 
 We will start from a frontend first approach and then move to a backend first approach. However, we will start with the data contract when we start to develop any data related functionality.
 
+## Getting Started
+
+### Prerequisites
+
+- JDK 17 or later
+- Gradle
+
+### Building the Project
+
+#### Backend (Kotlin Spring)
+
+See [kotlin/todo-core/README.md](./kotlin/todo-core/README.md) for more information.
+
 ## Technology
 
 ### Frontend
@@ -37,24 +50,11 @@ See [backend-design.md](./docs/backend-design.md) for the backend design.
   - [ ] Add Identity component to the core application
   - [ ] Implement a HTTP basic authentication for the API
   - [ ] Implement RBAC for the todo items
-    - [ ] Implement a 
+    - [ ] Implement a
 - [ ] Create a basic frontend
   - [ ] Implement a basic UI
   - [ ] Implement a basic CRUD functionality
-
-## Getting Started
-
-### Prerequisites
-
-- JDK 17 or later
-- Gradle
-
-### Building the Project
-
-#### Backend (Kotlin Spring)
-
-See [kotlin/todo-core/README.md](./kotlin/todo-core/README.md) for more information.
-
+  - 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
