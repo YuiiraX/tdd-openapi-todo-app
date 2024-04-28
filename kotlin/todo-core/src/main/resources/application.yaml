@@ -11,4 +11,4 @@ spring:
   jpa:
     open-in-view: true
   liquibase:
-    change-log: classpath:db/changelog/db.changelog-master.yaml
+    change-log: classpath:db/changelog/db.changelog-root.yaml
