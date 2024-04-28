@@ -32,3 +32,9 @@ To run the tests, execute the following command:
 
 The API follows the OpenAPI specification. The specification file is located at `specs/todo-core-v1.yaml`. You can view the API documentation by opening this file in an OpenAPI viewer.
 
+## Building Docker Image
+
+As of Spring Boot 2.3, the application can be built as a Docker image using the `bootBuildImage` task.
+
+For publishing the image to a Docker registry, you can use the `bootBuildImage` task with the `--publish` flag. 
+You will need to configure the Docker registry in the `build.gradle` file.

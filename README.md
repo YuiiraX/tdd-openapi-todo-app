@@ -41,3 +41,7 @@ See [backend-design.md](./docs/backend-design.md) for the backend design.
 - [ ] Create a basic frontend
   - [ ] Implement a basic UI
   - [ ] Implement a basic CRUD functionality
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
