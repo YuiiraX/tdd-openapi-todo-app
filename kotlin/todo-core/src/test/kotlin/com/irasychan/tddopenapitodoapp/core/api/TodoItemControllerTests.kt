@@ -50,9 +50,8 @@ class TodoItemControllerTests {
 
     @Nested
     @WithMockUser
-    @DisplayName("CRUD Test")
-    inner class CrudTest {
-
+    @DisplayName("Given authenticated")
+    inner class Authenticated {
         @Nested
         @DisplayName("POST /todos")
         @IndicativeSentencesGeneration(separator = " -> ")
@@ -402,6 +401,80 @@ class TodoItemControllerTests {
                     .andExpect(jsonPath("$[1].id").value("00000000-0000-0000-0000-000000000002"))
                     .andExpect(jsonPath("$[2].id").value("00000000-0000-0000-0000-000000000001"))
             }
+
+            @Test
+            fun `with dueDateStart filter, should return todo items with no dueDate`() {
+                // given
+                // seed the database with some TodoItems
+                todoItemRepository.saveAll(
+                    listOf(
+                        TodoItem(
+                            id = UUID.fromString("00000000-0000-0000-0000-000000000001"),
+                            name = "Test Todo 1",
+                            description = "Test Description 1",
+                            status = TodoItemStatus.NOT_STARTED,
+                            dueDate = OffsetDateTime.parse("2022-12-29T23:59:59Z")
+                        ),
+                        TodoItem(
+                            id = UUID.fromString("00000000-0000-0000-0000-000000000002"),
+                            name = "Test Todo 2",
+                            description = "Test Description 2",
+                            status = TodoItemStatus.IN_PROGRESS,
+                            dueDate = OffsetDateTime.parse("2022-12-30T23:59:59Z")
+                        ),
+                        TodoItem(
+                            id = UUID.fromString("00000000-0000-0000-0000-000000000003"),
+                            name = "Test Todo 3",
+                            description = "Test Description 3",
+                            status = TodoItemStatus.COMPLETED,
+                            dueDate = null
+                        )
+                    )
+                )
+                mockMvc.perform(
+                    get("${API_BASE_PATH}/todos?dueDateStart=2022-12-31T22:59:59Z")
+                )
+                    .andExpect(status().isOk)
+                    .andExpect(jsonPath("$").isArray)
+                    .andExpect(jsonPath("$[0].id").value("00000000-0000-0000-0000-000000000003"))
+            }
+
+            @Test
+            fun `with dueDateEnd filter, should return todo items with no dueDate`() {
+                // given
+                // seed the database with some TodoItems
+                todoItemRepository.saveAll(
+                    listOf(
+                        TodoItem(
+                            id = UUID.fromString("00000000-0000-0000-0000-000000000001"),
+                            name = "Test Todo 1",
+                            description = "Test Description 1",
+                            status = TodoItemStatus.NOT_STARTED,
+                            dueDate = OffsetDateTime.parse("2023-12-29T23:59:59Z")
+                        ),
+                        TodoItem(
+                            id = UUID.fromString("00000000-0000-0000-0000-000000000002"),
+                            name = "Test Todo 2",
+                            description = "Test Description 2",
+                            status = TodoItemStatus.IN_PROGRESS,
+                            dueDate = OffsetDateTime.parse("2023-12-30T23:59:59Z")
+                        ),
+                        TodoItem(
+                            id = UUID.fromString("00000000-0000-0000-0000-000000000003"),
+                            name = "Test Todo 3",
+                            description = "Test Description 3",
+                            status = TodoItemStatus.COMPLETED,
+                            dueDate = null
+                        )
+                    )
+                )
+                mockMvc.perform(
+                    get("${API_BASE_PATH}/todos?dueDateEnd=2022-12-31T22:59:59Z")
+                )
+                    .andExpect(status().isOk)
+                    .andExpect(jsonPath("$").isArray)
+                    .andExpect(jsonPath("$[0].id").value("00000000-0000-0000-0000-000000000003"))
+            }
         }
 
         @Nested
@@ -506,19 +579,55 @@ class TodoItemControllerTests {
                 )
                     .andExpect(status().isNoContent)
             }
+
+            @Test
+            fun `should return 404 when the TodoItem is not found`() {
+                mockMvc.perform(
+                    delete("${API_BASE_PATH}/todos/00000000-0000-0000-0000-000000000001")
+                )
+                    .andExpect(status().isNotFound)
+            }
         }
     }
 
     @Nested
-    @DisplayName("Authorization Test")
-    inner class AuthorizationTest {
+    @DisplayName("Given not authenticated")
+    @IndicativeSentencesGeneration(separator = " -> ")
+    inner class NotAuthenticated {
         @Test
-        fun `should return 401 when not authenticated`() {
+        fun `should return 401 when POST`() {
+            mockMvc.perform(
+                post("${API_BASE_PATH}/todos")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content("""{"name": "Test Todo", "description": "Test Description", "status": "NOT_STARTED", "dueDate": "2022-12-31T23:59:59Z"}""")
+            )
+                .andExpect(status().isUnauthorized)
+        }
+
+        @Test
+        fun `should return 401 when GET`() {
             mockMvc.perform(
                 get("${API_BASE_PATH}/todos")
             )
                 .andExpect(status().isUnauthorized)
         }
 
+        @Test
+        fun `should return 401 when PUT`() {
+            mockMvc.perform(
+                put("${API_BASE_PATH}/todos/00000000-0000-0000-0000-000000000001")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content("""{"name": "Updated Todo", "description": "Updated Description", "status": "IN_PROGRESS", "dueDate": "2022-12-31T23:59:59Z"}""")
+            )
+                .andExpect(status().isUnauthorized)
+        }
+
+        @Test
+        fun `should return 401 when DELETE`() {
+            mockMvc.perform(
+                delete("${API_BASE_PATH}/todos/00000000-0000-0000-0000-000000000001")
+            )
+                .andExpect(status().isUnauthorized)
+        }
     }
 }

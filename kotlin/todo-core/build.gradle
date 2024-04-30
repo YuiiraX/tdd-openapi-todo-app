@@ -42,7 +42,7 @@ kotlin {
 sourceSets {
     main {
         kotlin {
-            srcDirs += file("$buildDir/generated")
+            srcDirs += file("$buildDir/generated/src/main/kotlin")
         }
     }
 }
@@ -100,7 +100,7 @@ tasks.withType(KotlinJvmCompile).configureEach {
     jvmTargetValidationMode = JvmTargetValidationMode.WARNING
 }
 
-tasks.named('test') {
+test {
     useJUnitPlatform()
 }
 
@@ -109,12 +109,12 @@ openApiGenerate {
     inputSpec.set("$rootDir/specs/todo-core-v1.yaml")
     outputDir.set(layout.buildDirectory.dir("generated").get().asFile.path)
 
-    apiPackage.set("com.irasychan.tddopenapitodoapp.core.api")
-    modelPackage.set("com.irasychan.tddopenapitodoapp.core.api.model")
+    apiPackage.set("com.irasychan.tddopenapitodoapp.core.contract.api")
+    modelPackage.set("com.irasychan.tddopenapitodoapp.core.contract.model")
     configOptions.set([
-            basePackage: "com.irasychan.tddopenapitodoapp.core.api",
-            interfaceOnly: "true",
-            useSpringBoot3: "true",
+            basePackage       : "com.irasychan.tddopenapitodoapp.core",
+            interfaceOnly     : "true",
+            useSpringBoot3    : "true",
             enumPropertyNaming: "UPPERCASE"
     ])
 }

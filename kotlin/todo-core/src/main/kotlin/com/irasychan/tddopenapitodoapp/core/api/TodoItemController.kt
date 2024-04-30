@@ -1,6 +1,7 @@
 package com.irasychan.tddopenapitodoapp.core.api
 
-import com.irasychan.tddopenapitodoapp.core.api.model.NewTodoItem
+import com.irasychan.tddopenapitodoapp.core.contract.model.NewTodoItem
+import com.irasychan.tddopenapitodoapp.core.contract.api.TodosApi
 import com.irasychan.tddopenapitodoapp.core.model.TodoItem
 import com.irasychan.tddopenapitodoapp.core.data.TodoItemRepository
 import com.irasychan.tddopenapitodoapp.core.model.TodoItemStatus
@@ -11,8 +12,8 @@ import java.net.URI
 import java.time.OffsetDateTime
 import java.util.*
 import java.util.logging.Logger
-import com.irasychan.tddopenapitodoapp.core.api.model.TodoItemStatus as TodoItemStatusDTO
-import com.irasychan.tddopenapitodoapp.core.api.model.TodoItem as TodoItemDTO
+import com.irasychan.tddopenapitodoapp.core.contract.model.TodoItemStatus as TodoItemStatusDTO
+import com.irasychan.tddopenapitodoapp.core.contract.model.TodoItem as TodoItemDTO
 
 @RestController
 class TodoItemController(
@@ -52,7 +53,7 @@ class TodoItemController(
         dueDateEnd: OffsetDateTime?,
         sort: String?,
         order: String?
-    ): ResponseEntity<List<com.irasychan.tddopenapitodoapp.core.api.model.TodoItem>> {
+    ): ResponseEntity<List<TodoItemDTO>> {
         logger.info("Getting all todo items")
 
         val sortDirection = Sort.Direction.fromString(order ?: "asc")
@@ -68,7 +69,6 @@ class TodoItemController(
         }.let { todoItems ->
             when (sortField) {
                 "name" -> todoItems.sortedBy { it.name }
-                "status" -> todoItems.sortedBy { it.status }
                 "dueDate" -> todoItems.sortedBy { it.dueDate }
             }
             if (sortDirection == Sort.Direction.DESC) todoItems.reversed() else todoItems
